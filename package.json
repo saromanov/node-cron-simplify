@@ -1,0 +1,22 @@
+{
+  "name": "cron-simplify",
+  "version": "1.0.0",
+  "description": "Simplification of cron commands",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saromanov/node-cron-simplify.git"
+  },
+  "keywords": [
+    "cron"
+  ],
+  "author": "Sergey Romanov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/saromanov/node-cron-simplify/issues"
+  },
+  "homepage": "https://github.com/saromanov/node-cron-simplify#readme"
+}
