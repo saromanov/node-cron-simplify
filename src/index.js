@@ -25,13 +25,13 @@ var parse = function(data) {
 var parseAt = function(data) {
     var result = data.split('at');
     var rawDate = result.slice(-1)[0].trim();
-    return makeCronDate(rawDate);
+    return makeCronDate(parseDateTime(rawDate));
 }
 
 var parseAfter = function(data){
     var result = data.split('after');
     var rawDate = result.slice(-1)[0].trim();
-    makeDateAfter(rawDate);
+    return makeCronDate(makeDateAfter(rawDate));
 }
 
 var makeDateAfter = function(data) {
@@ -61,7 +61,7 @@ var makeDateAfter = function(data) {
     }
 
     var mom = moment();
-    var result = mom.add(num, attr)
+    var result = mom.add(num, attr);
     return parseDateTimeAfter(result.toDate());
 }
 
@@ -99,14 +99,13 @@ var parseDateTime = function(dateTime) {
 
 function parseDateTimeAfter(dateTime) {
     return {
-        getHour: dateTime.getHour(),
-        getMinutes: dateTime.getMinute(),
-        getHour: dateTime.getHour()
+        getHour: dateTime.getHours(),
+        getMinutes: dateTime.getMinutes(),
+        getSeconds: dateTime.getSeconds()
     }
 }
 
-function makeCronDate(data) {
-    var result = parseDateTime(data);
+function makeCronDate(result) {
     var resultStr = '';
     if (result.getSeconds !== undefined) {
         resultStr += result.getSeconds + ' ';
