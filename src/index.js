@@ -29,9 +29,18 @@ var parseDateTime = function(dateTime) {
         return
     }
     var hour = result[0];
+    if(!validateHour(hour)){
+        return
+    }
     var minutes = result[1];
+    if(!validateMinAndSec(minutes)){
+        return
+    }
     if(result.length > 2) {
         var seconds = result[2];
+        if(!validateMinAndSec(seconds)){
+            return
+        }
     }
     return  {
         getHour: hour,
@@ -61,6 +70,22 @@ function makeCronDate(data) {
     }
     resultStr += '* * *';
     return resultStr;
+}
+
+function validateHour(hour) {
+    if (hour > 24 || hour < 0) {
+        return false;
+    }
+
+    return true;
+}
+
+function validateMinAndSec(data) {
+    if (data > 59 || data < 0) {
+        return false;
+    }
+
+    return true;
 }
 
 function makeCronJob(cronTime, dec) {
