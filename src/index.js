@@ -37,6 +37,12 @@ var parseAfter = function(data){
 var makeDateAfter = function(data) {
     var num = data.slice(0, data.length-1);
     var attr = data.slice(-1)[0].trim();
+    var param = 'seconds';
+    if(attr == 'm'){
+        param = 'minutes';
+    }
+    
+    console.log(attr)
     var mom = moment();
     var result = mom.add(1, 'week')
     return makeCronDate(result.toDate());
