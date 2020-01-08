@@ -1,4 +1,5 @@
 var CronJob = require('cron').CronJob;
+var moment = require('momentjs');
 
 function New(path, decl) {
     var parsed = parse(path, decl);
@@ -12,10 +13,30 @@ var parse = function(data) {
     }
     // execute once
     if(data.startsWith('at')) {
-        var result = data.split('at');
-        var rawDate = result.slice(-1)[0].trim();
-        return makeCronDate(rawDate);
+        return parseAt(data);
     }
+
+    // execute after soem time
+    if(data.startsWith('after')) {
+        return parseAfter(data);
+    }
+}
+
+var parseAt = function(data) {
+    var result = data.split('at');
+    var rawDate = result.slice(-1)[0].trim();
+    return makeCronDate(rawDate);
+}
+
+var parseAfter = function(data){
+    var result = data.split('after');
+    var rawDate = result.slice(-1)[0].trim();
+    makeDateAfter(newDate);
+}
+
+var makeDateAfter = function(data) {
+    var mom = moment();
+    console.log(mom.add(1, 'week'));
 }
 
 // parsing of the datetime in format 12:50 
@@ -92,6 +113,6 @@ function makeCronJob(cronTime, dec) {
     new CronJob(cronTime, dec, null, true, 'Asia/Yekaterinburg');
 }
 
-New('at 21:38:10', function(){
+New('after 10s', function(){
     console.log('YES');
 });

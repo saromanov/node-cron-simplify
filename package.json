@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/saromanov/node-cron-simplify/issues"
   },
-  "homepage": "https://github.com/saromanov/node-cron-simplify#readme"
+  "homepage": "https://github.com/saromanov/node-cron-simplify#readme",
+  "dependencies": {
+    "cron": "^1.7.2",
+    "momentjs": "^2.0.0"
+  }
 }
