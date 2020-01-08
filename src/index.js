@@ -41,7 +41,13 @@ var makeDateAfter = function(data) {
     if(attr == 'm'){
         param = 'minutes';
     }
-    
+    if(attr == 'h'){
+        param = 'hours';
+    }
+    if(attr == 'w') {
+        param = 'week'
+    }
+
     console.log(attr)
     var mom = moment();
     var result = mom.add(1, 'week')
