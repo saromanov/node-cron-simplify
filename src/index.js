@@ -1,3 +1,5 @@
+var CronJob = require('cron').CronJob;
+
 function New(path) {
 
 }
@@ -46,13 +48,19 @@ var parseDateTime = function(dateTime) {
     }
 }
 
-function Date() {
-   
+function Date(value) {
+   var hours = value.getHour;
+   var minutes = value.getMinutes();
+   var seconds = value.getSeconds();
 }
 
 function makeDate(data) {
     var result = parseDateTime(data);
     return new Date(result);
+}
+
+function makeCronJob(cronTime, dec) {
+    new CronJob(cronTime), dec, null, true, 'America/Los_Angeles');
 }
 
 parse('at 12:50');
