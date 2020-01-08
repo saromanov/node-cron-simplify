@@ -1,5 +1,5 @@
 var CronJob = require('cron').CronJob;
-var moment = require('momentjs');
+var moment = require('moment');
 
 function New(path, decl) {
     var parsed = parse(path, decl);
@@ -31,12 +31,13 @@ var parseAt = function(data) {
 var parseAfter = function(data){
     var result = data.split('after');
     var rawDate = result.slice(-1)[0].trim();
-    makeDateAfter(newDate);
+    makeDateAfter(rawDate);
 }
 
 var makeDateAfter = function(data) {
     var mom = moment();
-    console.log(mom.add(1, 'week'));
+    var result = mom.add(1, 'week')
+    return makeCronDate(result.toDate());
 }
 
 // parsing of the datetime in format 12:50 
