@@ -1,11 +1,12 @@
 var CronJob = require('cron').CronJob;
 
 function New(path, decl) {
-    return parse(path, decl);
+    var parsed = parse(path, decl);
+    return makeCronJob(parsed, decl);
 }
 
 // parsing of the input data
-var parse = function(data, decl) {
+var parse = function(data) {
     if(typeof data != 'string') {
         return
     }
@@ -13,9 +14,7 @@ var parse = function(data, decl) {
     if(data.startsWith('at')) {
         var result = data.split('at');
         var rawDate = result.slice(-1)[0].trim();
-        var date = makeCronDate(rawDate);
-        console.log(date);
-        makeCronJob(date, decl);
+        return makeCronDate(rawDate);
     }
 }
 
@@ -68,6 +67,6 @@ function makeCronJob(cronTime, dec) {
     new CronJob(cronTime, dec, null, true, 'Asia/Yekaterinburg');
 }
 
-New('at 21:26', function(){
+New('at 21:38:10', function(){
     console.log('YES');
 });
