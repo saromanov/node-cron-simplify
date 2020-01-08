@@ -1,19 +1,21 @@
 var CronJob = require('cron').CronJob;
 
-function New(path) {
-
+function New(path, decl) {
+    return parse(path, decl);
 }
 
 // parsing of the input data
-var parse = function(data) {
+var parse = function(data, decl) {
     if(typeof data != 'string') {
         return
     }
+    // execute once
     if(data.startsWith('at')) {
         var result = data.split('at');
         var rawDate = result.slice(-1)[0].trim();
         var date = makeCronDate(rawDate);
         console.log(date);
+        makeCronJob(date, decl);
     }
 }
 
@@ -40,21 +42,13 @@ var parseDateTime = function(dateTime) {
     }
 }
 
-function Date(value) {
-   var hours = value.getHour;
-   var minutes = value.getMinutes;
-   var seconds = value.getSeconds;
-
-}
-
 function makeCronDate(data) {
     var result = parseDateTime(data);
     var resultStr = '';
-    console.log(result);
     if (result.getSeconds !== undefined) {
         resultStr += result.getSeconds + ' ';
     } else {
-        resultStr += "* "
+        resultStr += "0 "
     }
     if (result.getMinutes !== undefined) {
         resultStr += result.getMinutes + ' ';
@@ -67,11 +61,13 @@ function makeCronDate(data) {
         resultStr += "* "
     }
     resultStr += '* * *';
-    return new Date(result);
+    return resultStr;
 }
 
 function makeCronJob(cronTime, dec) {
-    new CronJob(cronTime, dec, null, true, 'America/Los_Angeles');
+    new CronJob(cronTime, dec, null, true, 'Asia/Yekaterinburg');
 }
 
-parse('at 12:50');
+New('at 21:26', function(){
+    console.log('YES');
+});
