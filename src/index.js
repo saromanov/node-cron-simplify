@@ -37,7 +37,13 @@ var parseAfter = function(data){
 var makeDateAfter = function(data) {
     var num = data.slice(0, data.length-1);
     var attr = data.slice(-1)[0].trim();
-    var param = 'seconds';
+    if (attr == undefined) {
+        return
+    }
+    var param = '';
+    if(attr == 'seconds') {
+        param = 'seconds';
+    }
     if(attr == 'm'){
         param = 'minutes';
     }
@@ -50,10 +56,12 @@ var makeDateAfter = function(data) {
     if(attr == 'w') {
         param = 'week'
     }
-
-    console.log(attr)
+    if(attr == 'y') {
+        param = 'years'
+    }
+    
     var mom = moment();
-    var result = mom.add(1, 'week')
+    var result = mom.add(num, attr)
     return makeCronDate(result.toDate());
 }
 
