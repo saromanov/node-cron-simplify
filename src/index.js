@@ -59,10 +59,10 @@ var makeDateAfter = function(data) {
     if(attr == 'y') {
         param = 'years'
     }
-    
+
     var mom = moment();
     var result = mom.add(num, attr)
-    return makeCronDate(result.toDate());
+    return parseDateTimeAfter(result.toDate());
 }
 
 // parsing of the datetime in format 12:50 
@@ -94,6 +94,14 @@ var parseDateTime = function(dateTime) {
         getMinutes: minutes,
         getSeconds: seconds,
         once: true,
+    }
+}
+
+function parseDateTimeAfter(dateTime) {
+    return {
+        getHour: dateTime.getHour(),
+        getMinutes: dateTime.getMinute(),
+        getHour: dateTime.getHour()
     }
 }
 
