@@ -12,7 +12,7 @@ var parse = function(data) {
     if(data.startsWith('at')) {
         var result = data.split('at');
         var rawDate = result.slice(-1)[0].trim();
-        var date = makeDate(rawDate);
+        var date = makeCronDate(rawDate);
         console.log(date);
     }
 }
@@ -32,35 +32,46 @@ var parseDateTime = function(dateTime) {
     if(result.length > 2) {
         var seconds = result[2];
     }
-
-    return function() {
-        getHour: {
-            return hour;
-        }
-
-        getMinutes: {
-            return minutes;
-        }
-
-        getSeconds: {
-            return seconds;
-        }
+    return  {
+        getHour: hour,
+        getMinutes: minutes,
+        getSeconds: seconds,
+        once: true,
     }
 }
 
 function Date(value) {
    var hours = value.getHour;
-   var minutes = value.getMinutes();
-   var seconds = value.getSeconds();
+   var minutes = value.getMinutes;
+   var seconds = value.getSeconds;
+
 }
 
-function makeDate(data) {
+function makeCronDate(data) {
     var result = parseDateTime(data);
+    var resultStr = '';
+    console.log(result);
+    if (result.getSeconds !== undefined) {
+        resultStr += result.getSeconds + ' ';
+    } else {
+        resultStr += "* "
+    }
+    if (result.getMinutes !== undefined) {
+        resultStr += result.getMinutes + ' ';
+    } else {
+        resultStr += "* "
+    }
+    if (result.getHour !== undefined) {
+        resultStr += result.getHour + ' ';
+    } else {
+        resultStr += "* "
+    }
+    resultStr += '* * *';
     return new Date(result);
 }
 
 function makeCronJob(cronTime, dec) {
-    new CronJob(cronTime), dec, null, true, 'America/Los_Angeles');
+    new CronJob(cronTime, dec, null, true, 'America/Los_Angeles');
 }
 
 parse('at 12:50');
