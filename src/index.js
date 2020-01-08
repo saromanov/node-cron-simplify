@@ -44,6 +44,9 @@ var makeDateAfter = function(data) {
     if(attr == 'h'){
         param = 'hours';
     }
+    if(attr == 'd'){
+        param = 'days';
+    }
     if(attr == 'w') {
         param = 'week'
     }
