@@ -116,7 +116,14 @@ var parseEvery = function(data) {
 }
 
 var makeCronDateEvery = function(data) {
-
+    var num = data.slice(0, data.length-1);
+    var attr = data.slice(-1)[0].trim();
+    if (attr == undefined) {
+        return
+    }
+    if(attr == 's') {
+        return '/' + num + '* * * * *';
+    }
 }
 
 function makeCronDate(result) {
@@ -160,6 +167,6 @@ function makeCronJob(cronTime, dec) {
     new CronJob(cronTime, dec, null, true, 'Asia/Yekaterinburg');
 }
 
-New('after 1m', function(){
+New('every 1m', function(){
     console.log('YES');
 });
