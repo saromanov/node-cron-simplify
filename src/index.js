@@ -123,29 +123,35 @@ var makeCronDateEvery = function(data) {
     }
     if(attr == 's') {
         return {
-            getSeconds: "*/" + num
+            getSeconds: makeEveryPattern(num)
         }
     }
     if(attr == 'm') {
         return {
-            getMinutes: "*/" + num
+            getMinutes: makeEveryPattern(num)
         }
     }
     if(attr == 'h') {
         return {
-            getHours: "*/" + num
+            getHours: makeEveryPattern(num)
         }
     }
     if(attr == 'd') {
         return {
-            getDays: "*/" + num
+            getDays: makeEveryPattern(num)
         }
     }
     if(attr == 'm') {
         return {
-            getMonths: "*/" + num
+            getMonths: makeEveryPattern(num)
         }
     }
+}
+
+// retruns string for cron for recurring schedule
+// in format like 0 */1 * * * *
+var makeEveryPattern = function(num) {
+    return "*/" + num;
 }
 
 function makeCronDate(result) {
