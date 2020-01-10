@@ -20,6 +20,10 @@ var parse = function(data) {
     if(data.startsWith('after')) {
         return parseAfter(data);
     }
+
+    if(data.startsWith('every')) {
+        return parseEvery(data);
+    }
 }
 
 var parseAt = function(data) {
@@ -105,6 +109,16 @@ function parseDateTimeAfter(dateTime) {
     }
 }
 
+var parseEvery = function(data) {
+    var result = data.split('after');
+    var rawDate = result.slice(-1)[0].trim();
+    return makeCronDate(makeCronDateEvery(rawDate));
+}
+
+var makeCronDateEvery = function(data) {
+
+}
+
 function makeCronDate(result) {
     var resultStr = '';
     if (result.getSeconds !== undefined) {
@@ -146,6 +160,6 @@ function makeCronJob(cronTime, dec) {
     new CronJob(cronTime, dec, null, true, 'Asia/Yekaterinburg');
 }
 
-New('after 10s', function(){
+New('after 1m', function(){
     console.log('YES');
 });
