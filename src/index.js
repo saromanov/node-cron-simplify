@@ -33,8 +33,7 @@ var parseAt = function(data) {
 }
 
 var parseAfter = function(data){
-    var result = data.split('after');
-    var rawDate = result.slice(-1)[0].trim();
+    var rawDate = parseExpression(data, 'after');
     return makeCronDate(makeDateAfter(rawDate));
 }
 
@@ -110,9 +109,13 @@ function parseDateTimeAfter(dateTime) {
 }
 
 var parseEvery = function(data) {
-    var result = data.split('every');
-    var rawDate = result.slice(-1)[0].trim();
+    var rawDate = parseExpression(data, 'every');
     return makeCronDate(makeCronDateEvery(rawDate));
+}
+
+var parseExpression = function(data, str) {
+    var result = data.split(str);
+    return result.slice(-1)[0].trim();
 }
 
 var makeCronDateEvery = function(data) {
@@ -195,6 +198,6 @@ function makeCronJob(cronTime, dec) {
     new CronJob(cronTime, dec, null, true, 'Asia/Yekaterinburg');
 }
 
-New('every 1m', function(){
+New('every 1s', function(){
     console.log('YES');
 });
