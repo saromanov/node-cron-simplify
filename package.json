@@ -4,7 +4,7 @@
   "description": "Simplification of cron commands",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,7 @@
     "eslint-plugin-import": "^2.20.0",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1"
+    "eslint-plugin-standard": "^4.0.1",
+    "mocha": "^7.0.0"
   }
 }

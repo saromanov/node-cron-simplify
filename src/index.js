@@ -198,6 +198,6 @@ function makeCronJob (cronTime, dec) {
   return new CronJob(cronTime, dec, null, true, 'Asia/Yekaterinburg')
 }
 
-New('every 5s', function () {
-  console.log('YES')
-})
+exports.New = function(path, decl) {
+    return New(path, decl);
+}
