@@ -198,6 +198,6 @@ function makeCronJob(cronTime, dec) {
     new CronJob(cronTime, dec, null, true, 'Asia/Yekaterinburg');
 }
 
-New('every 1s', function(){
+New('every 5s', function(){
     console.log('YES');
 });
