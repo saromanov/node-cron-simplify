@@ -8,4 +8,8 @@ var cron = require('../src');
       });
       assert.equal(cr.pattern, undefined);
     });
+    it("should't init cron because of empty decl", function() {
+        var cr = cron.New('every 1s');
+        assert.equal(cr.pattern, undefined);
+      });
   });
