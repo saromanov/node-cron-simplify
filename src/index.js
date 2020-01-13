@@ -2,7 +2,11 @@ var CronJob = require('cron').CronJob
 var moment = require('moment')
 
 function New (path, decl) {
+  if (path === '' || decl === undefined) {
+    return this
+  }
   var parsed = parse(path, decl)
+  this.pattern = parsed
   return makeCronJob(parsed, decl)
 }
 
@@ -198,6 +202,6 @@ function makeCronJob (cronTime, dec) {
   return new CronJob(cronTime, dec, null, true, 'Asia/Yekaterinburg')
 }
 
-exports.New = function(path, decl) {
-    return New(path, decl);
+exports.New = function (path, decl) {
+  return New(path, decl)
 }

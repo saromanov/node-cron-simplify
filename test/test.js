@@ -6,6 +6,6 @@ var cron = require('../src');
       var cr = cron.New('', function(){
           console.log('YES');
       });
-      
+      assert.equal(cr.pattern, undefined);
     });
   });
