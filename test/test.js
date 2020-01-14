@@ -15,17 +15,14 @@ var cron = require('../src');
   });
 
   describe('testing every', function() {
-    before(function(){
-      this.reached = false;
-    })
-    after(function(){
-      console.log(this.reached);
-    })
     it("should run every 1s", function(done) {
-      setTimeout(done, 3000);
+      setTimeout(done, 1000);
+      var available = false;
       var cr = cron.New('every 1s', function(){
-          this.reached = true;
+          available = true;
+      }, function(job){
+        job.stop();
       });
-      done();
+      assert.equal(available, true);
     });
   });

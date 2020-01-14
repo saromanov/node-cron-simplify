@@ -1,13 +1,13 @@
 var CronJob = require('cron').CronJob
 var moment = require('moment')
 
-function New (path, decl) {
+function New (path, decl, onCompleted) {
   if (path === '' || decl === undefined) {
     return this
   }
   var parsed = parse(path, decl)
   this.pattern = parsed
-  return makeCronJob(parsed, decl)
+  return makeCronJob(parsed, decl, onCompleted)
 }
 
 // parsing of the input data
@@ -198,8 +198,8 @@ function validateMinAndSec (data) {
   return true
 }
 
-function makeCronJob (cronTime, dec) {
-  return new CronJob(cronTime, dec, null, true, 'Asia/Yekaterinburg')
+function makeCronJob (cronTime, dec, onCompleted) {
+  return new CronJob(cronTime, dec, onCompleted, true, 'Asia/Yekaterinburg');
 }
 
 exports.New = function (path, decl) {
