@@ -13,3 +13,19 @@ var cron = require('../src');
         assert.equal(cr.pattern, undefined);
       });
   });
+
+  describe('testing every', function() {
+    before(function(){
+      this.reached = false;
+    })
+    after(function(){
+      console.log(this.reached);
+    })
+    it("should run every 1s", function(done) {
+      setTimeout(done, 3000);
+      var cr = cron.New('every 1s', function(){
+          this.reached = true;
+      });
+      done();
+    });
+  });
