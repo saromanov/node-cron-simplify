@@ -30,4 +30,28 @@ var cron = require('../src');
         done();
       }), 3500);
     });
+
+    it("should run every 5s", function(done) {
+      var available = false;
+      var count = 0;
+      var cr = cron.New('every 1s', function(d){
+        count += 1;
+        if (count== 2 ) {
+          cr.stop();
+        }
+      });
+      cr.start();
+      setTimeout((function(){
+        assert.equal(count,2);
+        done();
+      }), 11000);
+    });
+
+    it("should not start because of invalid every", function(done) {
+      var available = false;
+      var count = 0;
+      var cr = cron.New('every 1qqqq', function(d){
+      });
+      assert.equal(cr, undefined);
+    });
   });
