@@ -199,9 +199,9 @@ function validateMinAndSec (data) {
 }
 
 function makeCronJob (cronTime, dec, onCompleted) {
-  return new CronJob(cronTime, dec, onCompleted, true, 'Asia/Yekaterinburg');
+  return new CronJob(cronTime, dec, onCompleted, false, 'Asia/Yekaterinburg');
 }
 
-exports.New = function (path, decl) {
-  return New(path, decl)
+exports.New = function (path, decl, onCompleted) {
+  return New(path, decl, onCompleted)
 }
