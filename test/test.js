@@ -16,6 +16,7 @@ var cron = require('../src');
 
   describe('testing every', function() {
     it("should run every 1s", function(done) {
+      this.timeout(3800);
       var available = false;
       var count = 0;
       var cr = cron.New('every 1s', function(d){
@@ -32,6 +33,7 @@ var cron = require('../src');
     });
 
     it("should run every 5s", function(done) {
+      this.timeout(12000);
       var available = false;
       var count = 0;
       var cr = cron.New('every 1s', function(d){
@@ -47,9 +49,7 @@ var cron = require('../src');
       }), 11000);
     });
 
-    it("should not start because of invalid every", function(done) {
-      var available = false;
-      var count = 0;
+    it("should not start because of invalid every", function() {
       var cr = cron.New('every 1qqqq', function(d){
       });
       assert.equal(cr, undefined);

@@ -5,7 +5,10 @@ function New (path, decl, onCompleted) {
   if (path === '' || decl === undefined) {
     return this
   }
-  var parsed = parse(path, decl)
+  var parsed = parse(path, decl);
+  if(parsed === undefined) {
+    return
+  }
   this.pattern = parsed
   return makeCronJob(parsed, decl, onCompleted)
 }
@@ -114,7 +117,11 @@ function parseDateTimeAfter (dateTime) {
 
 var parseEvery = function (data) {
   var rawDate = parseExpression(data, 'every')
-  return makeCronDate(makeCronDateEvery(rawDate))
+  var every = makeCronDateEvery(rawDate);
+  if(every === undefined) {
+    return
+  }
+  return makeCronDate(every);
 }
 
 var parseExpression = function (data, str) {
@@ -153,6 +160,8 @@ var makeCronDateEvery = function (data) {
       getMonths: makeEveryPattern(num)
     }
   }
+
+  return
 }
 
 // retruns string for cron for recurring schedule
