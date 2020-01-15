@@ -16,12 +16,18 @@ var cron = require('../src');
 
   describe('testing every', function() {
     it("should run every 1s", function(done) {
-      setTimeout(done, 1000);
       var available = false;
+      var count = 0;
       var cr = cron.New('every 1s', function(d){
-          available = true;
+        count += 1;
+        if (count== 3 ) {
+          cr.stop();
+        }
       });
       cr.start();
-      assert.equal(available, true);
+      setTimeout((function(){
+        assert.equal(count,3);
+        done();
+      }), 3500);
     });
   });
