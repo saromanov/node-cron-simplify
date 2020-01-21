@@ -62,9 +62,23 @@ var cron = require('../src');
         assert.equal(cr.pattern, undefined);
     });
 
-    it("should run after 1s", function() {
+    it("should run after 1s with mm:ss", function(done) {
+      this.timeout(3000);
       var date = new Date();
       date.setSeconds(date.getSeconds()+1);
+      var cr = cron.New('at' + date.getMinutes() + ":" + date.getSeconds(), function(d){
+          cr.stop();
+      });
       assert.equal(cr.pattern, undefined);
+  });
+
+  it("should run after 1s with hh:mm:ss", function(done) {
+    this.timeout(3000);
+    var date = new Date();
+    date.setSeconds(date.getSeconds()+1);
+    var cr = cron.New('at' + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds(), function(d){
+        cr.stop();
+    });
+    assert.equal(cr.pattern, undefined);
   });
   });
