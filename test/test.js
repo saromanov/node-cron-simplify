@@ -55,3 +55,16 @@ var cron = require('../src');
       assert.equal(cr, undefined);
     });
   });
+
+  describe('testing at', function() {
+    it("should't start because of invalid expression", function() {
+        var cr = cron.New('at 1oooo');
+        assert.equal(cr.pattern, undefined);
+    });
+
+    it("should run after 1s", function() {
+      var date = new Date();
+      date.setSeconds(date.getSeconds()+1);
+      assert.equal(cr.pattern, undefined);
+  });
+  });
